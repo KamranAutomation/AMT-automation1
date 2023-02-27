@@ -1,0 +1,21 @@
+class CreateNewUser:
+    # Create New User Page
+    button_user_management_id = "User Management"
+    button_create_new_user_id = "create-user"
+    textbox_first_name_id = "firstNameId"
+    textbox_last_name_id = "lastNameId"
+    textbox_title_id = "lastNameId"
+    combobox_role_category_leadership_id = "a3111bbe7094-0"
+    textbox_role_category_email_id = "emailId"
+    dropdown_cell_number_code_id = "cellCodeId"
+    dropdown_option_cell_number_canada_id = "a3b8314d72e6-2"
+    textbox_cell_number_id = "cellNumberId"
+    dropdown_work_number_code_id = "aa8714741e2b"
+    dropdown_option_work_number_canada_id = "aa8714741e2b-2"
+    button_next_personal_info_id = "btn-next"
+    dropdown_option_organization_type_ancera_id = "aeba72ada59d-0"
+    dropdown_option_organization_ancera_id = "ad27d8bcc3ab-0"
+    button_next_organization_info_id = "ad27d8bcc3ab-0"
+    combobox_system_role_id = "aa9f929ed387-0"
+    dropdown_system_role_admin_id = "aa9f929ed387-0"
+
