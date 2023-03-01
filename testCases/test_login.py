@@ -63,7 +63,7 @@ class Test_001_Login:
         time.sleep(15)
         self.lp.clickLogout()
         time.sleep(2)
-        if self.driver.current_url == "https://qa.autymate.com/account/login":
+        if self.driver.current_url == "https://qa.autymate.com/account/login?product=amt-qbo":
             assert True
             self.driver.close()
         else:
