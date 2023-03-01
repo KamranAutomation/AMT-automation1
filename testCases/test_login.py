@@ -35,6 +35,7 @@ class Test_001_Login:
     def test_login(self, setup):  # lp is stands for login page
         self.driver = setup
         self.driver.get(self.baseURL)
+        self.driver.maximize_window()
         time.sleep(5)
         self.lp = LoginPage(self.driver)
         self.lp.setUserName(self.username)
@@ -56,6 +57,7 @@ class Test_001_Login:
     def test_logout(self, setup):
         self.driver = setup
         self.driver.get(self.baseURL)
+        self.driver.maximize_window()
         self.lp = LoginPage(self.driver)
         self.lp.setUserName(self.username)
         self.lp.setPassword(self.password)
