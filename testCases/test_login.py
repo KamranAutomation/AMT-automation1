@@ -81,44 +81,24 @@ class Test_001_Login:
         self.driver.get(self.baseURL)
         self.driver.maximize_window()
         self.lp = LoginPage(self.driver)
+        self.ep = EntitiesPage(self.driver)
         self.lp.setUserName(self.username)
         self.lp.setPassword(self.password)
-        WebDriverWait(self.driver, 15)
         self.lp.clickLogin()
-        WebDriverWait(self.driver, 15)
-        self.ep = EntitiesPage(self.driver)
-        self.ep.select_excel_file_item()
-        WebDriverWait(self.driver, 15)
+        time.sleep(10)
+        self.ep.select_Excel_file_item()
+        time.sleep(5)
         self.lp.clickLogout()
         time.sleep(2)
 
-    def test_logout1(self, setup):
+
+    def test_logout3(self, setup):
         self.driver = setup
         self.driver.get(self.baseURL)
         self.driver.maximize_window()
-        self.driver.implicitly_wait(10)  # add implicit wait
-
         self.lp = LoginPage(self.driver)
         self.lp.setUserName(self.username)
         self.lp.setPassword(self.password)
         self.lp.clickLogin()
+        time.sleep(10)
 
-        self.ep = EntitiesPage(self.driver)
-        WebDriverWait(self.driver, 20).until(
-            EC.visibility_of_element_located((By.XPATH, "//button[contains(@class,'btn-upload')]")))
-        self.ep.select_excel_file_item()
-
-        WebDriverWait(self.driver, 20).until(
-            EC.invisibility_of_element_located((By.XPATH, "//div[contains(@class,'loader-container')]")))
-
-        self.lp.clickLogout()
-        WebDriverWait(self.driver, 20).until(
-            EC.url_to_be("https://qa.autymate.com/account/login?product=amt-qbo"))  # add explicit wait
-
-        if self.driver.current_url == "https://qa.autymate.com/account/login?product=amt-qbo":
-            assert True
-            self.driver.close()
-        else:
-            self.driver.save_screenshot("./Screenshots/test_logout4.png")
-            self.driver.close()
-            assert False

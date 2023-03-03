@@ -1,8 +1,10 @@
+import time
+
 from selenium.webdriver.common.by import By
 
 
 class EntitiesPage:
-    select_source_dropdown_id = "8d606cfa-9c93-4e76-bf31-07e45bbc191d"
+    select_source_dropdown_xpath = "//span[contains(text(),'Select Source')]"
     select_excel_file_item_xpath = "//span[contains(text(),'Excel Files')]"
     select_destination_dropdown_id = "k-bdfede3d-7cd2-4bb7-a2a8-0abe67239ff9"
     select_quickbook_online_item_xpath = "//span[contains(text(),'QuickBooks Online')]"
@@ -14,8 +16,9 @@ class EntitiesPage:
     def __init__(self, driver):
         self.driver = driver
 
-    def select_excel_file_item(self):
-        self.driver.find_element(By.ID, self.select_source_dropdown_id).click()
+    def select_Excel_file_item(self):
+        self.driver.find_element(By.XPATH, self.select_source_dropdown_xpath).click()
+        time.sleep(3)
         self.driver.find_element(By.XPATH, self.select_excel_file_item_xpath).click()
 
     def setPassword(self, password):
