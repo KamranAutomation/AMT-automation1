@@ -76,7 +76,7 @@ class Test_001_Login:
             assert False
 
     @allure.severity(allure.severity_level.CRITICAL)
-    def test_logout1(self, setup):
+    def test_Customer_entity(self, setup):
         self.driver = setup
         self.driver.get(self.baseURL)
         self.driver.maximize_window()
@@ -87,6 +87,8 @@ class Test_001_Login:
         self.lp.clickLogin()
         time.sleep(10)
         self.ep.select_Excel_file_item()
+        time.sleep(10)
+        self.ep.source_file_Upload()
         time.sleep(5)
         self.lp.clickLogout()
 
