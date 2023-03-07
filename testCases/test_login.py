@@ -89,7 +89,7 @@ class Test_001_Login:
         self.ep.select_Excel_file_item()
         time.sleep(5)
         self.lp.clickLogout()
-        time.sleep(2)
+
 
 
     def test_logout3(self, setup):
