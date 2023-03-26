@@ -31,7 +31,8 @@ class EntitiesPage:
     Intuit_popup_Login_credentials_Email_xpath = "//input[@id='iux-username-password-sign-in-user-id-input']"
     Intuit_popup_Login_credentials_Password_id = "iux-username-password-sign-in-password-input"
     Intuit_popup_SignIn_button_cssselector = "button[type='submit']"
-
+    Intuit_popup_Skip_now_button_xpath = "//button[normalize-space()='Skip for now']"
+    Intuit_popup_Connecting_Autymete_to_QBO_button_cssselector = ".StyledButton__Wrapper-vnaxcc-1.gYvrJh.authorize-connect-button"
 
     def __init__(self, driver):
         self.driver = driver
@@ -100,6 +101,15 @@ class EntitiesPage:
         self.driver.find_element(By.ID, self.Intuit_popup_Login_credentials_Password_id).send_keys("Autotestk210#")
         time.sleep(2)
         self.driver.find_element(By.CSS_SELECTOR, self.Intuit_popup_SignIn_button_cssselector).click()
+        time.sleep(5)
+        self.driver.find_element(By.XPATH, self.Intuit_popup_Skip_now_button_xpath).click()
+        time.sleep(30)
+        self.driver.find_element(By.CSS_SELECTOR, self.Intuit_popup_Connecting_Autymete_to_QBO_button_cssselector).click()
+        time.sleep(5)
+
+        # Switch back to the original window
+        self.driver.switch_to.window(self.driver.window_handles[0])
+
 
 
 
