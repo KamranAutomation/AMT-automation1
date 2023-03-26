@@ -1,6 +1,9 @@
 import time
+from telnetlib import EC
+
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class EntitiesPage:
@@ -20,6 +23,14 @@ class EntitiesPage:
     popup_file_upload_path_xpath = "//input[@name='files']"
     popup_complete_file_upload_button_xpath = "//button[@class='k-primary fill-container k-button']"
     Customer_excel_sheet_tab_selection_xpath ="//span[@title='Customers']"
+    next_step_button_in_flow_xpath = "//button[normalize-space()='Next']"
+    Qbo_connection_button_xpath ="//span[contains(text(),'Click Here to Connect to Existing QuickBooks Onlin')]"
+    Qbo_connection_button_setting_dropdown_cssselector = ".k-panelbar-item-text.ng-tns-c89-17.ng-star-inserted"
+    Qbo_connection_popup_toggle_on_xpath = "//span[@class='k-switch-label-off']"
+    Qbo_connection_popup_create_connection_button_cssselector = "span[class='ng-star-inserted']"
+    Intuit_popup_Login_credentials_Email_xpath = "//input[@id='iux-username-password-sign-in-user-id-input']"
+    Intuit_popup_Login_credentials_Password_id = "iux-username-password-sign-in-password-input"
+    Intuit_popup_SignIn_button_cssselector = "button[type='submit']"
 
 
     def __init__(self, driver):
@@ -39,7 +50,8 @@ class EntitiesPage:
         self.driver.find_element(By.XPATH, self.select_source_app_dropdown_xpath).click()
         time.sleep(5)
         self.driver.find_element(By.XPATH, self.select_file_upload_option_xpath).click()
-        time.sleep(5)
+
+    def Customer_entity_selection (self):
         # /////////////////////////Choose destination to see relevant options below////////////////////////////
         self.driver.find_element(By.XPATH, self.select_source_entity_destination_dropdown_xpath).click()
         time.sleep(5)
@@ -63,6 +75,35 @@ class EntitiesPage:
 
     def Customer_excel_sheet_Tab(self):
         self.driver.find_element(By.XPATH, self.Customer_excel_sheet_tab_selection_xpath).click()
+        time.sleep(5)
+        self.driver.find_element(By.XPATH, self.next_step_button_in_flow_xpath).click()
+
+    def QBO_connection_popup(self):
+        self.driver.find_element(By.XPATH, self.Qbo_connection_button_xpath).click()
+        time.sleep(5)
+        self.driver.find_element(By.CSS_SELECTOR, self.Qbo_connection_button_setting_dropdown_cssselector).click()
+        time.sleep(5)
+        self.driver.find_element(By.XPATH, self.Qbo_connection_popup_toggle_on_xpath).click()
+        time.sleep(5)
+        self.driver.find_element(By.CSS_SELECTOR, self.Qbo_connection_popup_create_connection_button_cssselector).click()
+
+    def Intuit_popup_Login_Credentials (self):
+
+        # Switch to the Intuit sign-in window
+        intuit_window = self.driver.window_handles[1]
+        self.driver.switch_to.window(intuit_window)
+
+        self.driver.find_element(By.XPATH, self.Intuit_popup_Login_credentials_Email_xpath).click()
+        self.driver.find_element(By.XPATH, self.Intuit_popup_Login_credentials_Email_xpath).send_keys("termsorqbo+1@gmail.com")
+        time.sleep(1)
+        self.driver.find_element(By.ID, self.Intuit_popup_Login_credentials_Password_id).click()
+        self.driver.find_element(By.ID, self.Intuit_popup_Login_credentials_Password_id).send_keys("Autotestk210#")
+        time.sleep(2)
+        self.driver.find_element(By.CSS_SELECTOR, self.Intuit_popup_SignIn_button_cssselector).click()
+
+
+
+
 
     def clickLogout(self):
         self.driver.find_element(By.XPATH, self.arrow_dropdown_button_xpath).click()
