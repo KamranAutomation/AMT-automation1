@@ -6,7 +6,7 @@ class LoginPage:
     textbox_password_xpath = "//input[@placeholder='Password']"
     button_login_xpath = "//button[normalize-space()='Sign In']"
     arrow_dropdown_button_xpath = "//i[@class='k-icon k-i-arrow-chevron-down']"
-    button_Logout_xpath = "//div[@class='option-shadow text-color-black--64 ng-star-inserted']"
+    button_Logout_xpath = "//body//app-root//div[@class='auty-header bg-color-white']//div//div[3]"
 
     def __init__(self, driver):
         self.driver = driver

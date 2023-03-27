@@ -41,5 +41,7 @@ class Test_001_Entities:
         self.ep.QBO_connection_popup()
         time.sleep(30)
         self.ep.Intuit_popup_Login_Credentials()
+        time.sleep(8)
+        self.ep.Finishing_steps_flow()
         time.sleep(5)
         self.lp.clickLogout()

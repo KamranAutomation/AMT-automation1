@@ -1,6 +1,5 @@
 import time
 from telnetlib import EC
-
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -32,7 +31,16 @@ class EntitiesPage:
     Intuit_popup_Login_credentials_Password_id = "iux-username-password-sign-in-password-input"
     Intuit_popup_SignIn_button_cssselector = "button[type='submit']"
     Intuit_popup_Skip_now_button_xpath = "//button[normalize-space()='Skip for now']"
-    Intuit_popup_Connecting_Autymete_to_QBO_button_cssselector = ".StyledButton__Wrapper-vnaxcc-1.gYvrJh.authorize-connect-button"
+    Intuit_popup_Connecting_Autymate_to_QBO_button_cssselector = ".StyledButton__Wrapper-vnaxcc-1.gYvrJh.authorize-connect-button"
+    next_3step_button_in_flow_xpath = "//button[normalize-space()='Next']"
+    email_for_notification_4step_cssselector = ".margin-top-5.fill-container.ng-pristine.ng-valid.k-textarea.k-autofill.ng-touched"
+    next_4step_button_in_flow_xpath = "//button[normalize-space()='Next']"
+    next_5step_button_in_flow_xpath = "//button[normalize-space()='Next']"
+    next_6step_button_in_flow_xpath = "//button[normalize-space()='Next']"
+    edit_your_autymation_field_xpath = "//input[@class='k-input']"
+    Run_Your_Autymation_button_xpath = "//div[@fxlayoutalign='center center']//button[@role='button']"
+
+
 
     def __init__(self, driver):
         self.driver = driver
@@ -88,7 +96,7 @@ class EntitiesPage:
         time.sleep(5)
         self.driver.find_element(By.CSS_SELECTOR, self.Qbo_connection_popup_create_connection_button_cssselector).click()
 
-    def Intuit_popup_Login_Credentials (self):
+    def Intuit_popup_Login_Credentials(self):
 
         # Switch to the Intuit sign-in window
         intuit_window = self.driver.window_handles[1]
@@ -102,13 +110,39 @@ class EntitiesPage:
         time.sleep(2)
         self.driver.find_element(By.CSS_SELECTOR, self.Intuit_popup_SignIn_button_cssselector).click()
         time.sleep(5)
-        self.driver.find_element(By.XPATH, self.Intuit_popup_Skip_now_button_xpath).click()
-        time.sleep(30)
-        self.driver.find_element(By.CSS_SELECTOR, self.Intuit_popup_Connecting_Autymete_to_QBO_button_cssselector).click()
-        time.sleep(5)
 
+        self.driver.find_element(By.XPATH, self.Intuit_popup_Skip_now_button_xpath).click()
+        time.sleep(2)
+        try:
+            self.driver.find_element(By.CSS_SELECTOR, self.Intuit_popup_Connecting_Autymate_to_QBO_button_cssselector).click()
+        except NoSuchElementException:
+            # Handle the case when the element is not found and move to the next step
+            print("Element not found. Moving to next step...")
+        pass
+        time.sleep(5)
         # Switch back to the original window
         self.driver.switch_to.window(self.driver.window_handles[0])
+
+    def Finishing_steps_flow(self):
+
+        self.driver.find_element(By.XPATH, self.next_3step_button_in_flow_xpath).click()
+        time.sleep(5)
+        self.driver.find_element(By.CSS_SELECTOR, self.email_for_notification_4step_cssselector).click()
+        self.driver.find_element(By.CSS_SELECTOR, self.email_for_notification_4step_cssselector).send_keys("automation@mailinator.com")
+        time.sleep(2)
+        self.driver.find_element(By.XPATH, self.next_4step_button_in_flow_xpath).click()
+        time.sleep(25)
+        self.driver.find_element(By.XPATH, self.next_5step_button_in_flow_xpath).click()
+        time.sleep(30)
+        self.driver.find_element(By.XPATH, self.next_6step_button_in_flow_xpath).click()
+        time.sleep(10)
+        self.driver.find_element(By.XPATH, self.edit_your_autymation_field_xpath).click()
+        self.driver.find_element(By.XPATH, self.edit_your_autymation_field_xpath).send_keys("Automation")
+        time.sleep(2)
+        self.driver.find_element(By.XPATH, self.Run_Your_Autymation_button_xpath).click()
+
+
+
 
 
 

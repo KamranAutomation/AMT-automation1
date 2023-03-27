@@ -97,14 +97,3 @@ class Test_001_Login:
         self.lp.clickLogout()
 
 
-
-    def test_logout3(self, setup):
-        self.driver = setup
-        self.driver.get(self.baseURL)
-        self.driver.maximize_window()
-        self.lp = LoginPage(self.driver)
-        self.lp.setUserName(self.username)
-        self.lp.setPassword(self.password)
-        self.lp.clickLogin()
-        time.sleep(10)
-
