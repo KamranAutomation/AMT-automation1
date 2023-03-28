@@ -66,7 +66,7 @@ class Test_001_Login:
         self.lp.clickLogin()
         time.sleep(15)
         self.lp.clickLogout()
-        time.sleep(2)
+        time.sleep(5)
         if self.driver.current_url == "https://qa.autymate.com/account/login?product=amt-qbo":
             assert True
             self.driver.close()
@@ -87,11 +87,9 @@ class Test_001_Login:
         self.lp.clickLogin()
         time.sleep(10)
         self.ep.select_Excel_file_item()
-        time.sleep(5)
-        self.ep.Customer_entity_selection()
         time.sleep(10)
         self.ep.source_file_Upload()
-        time.sleep(60)
+        time.sleep(30)
         self.ep.Customer_excel_sheet_Tab()
         time.sleep(5)
         self.lp.clickLogout()

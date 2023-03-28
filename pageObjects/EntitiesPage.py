@@ -21,9 +21,9 @@ class EntitiesPage:
     # popup_select_file_upload_button_xpath = "//div[@aria-label='Select files...']"
     popup_file_upload_path_xpath = "//input[@name='files']"
     popup_complete_file_upload_button_xpath = "//button[@class='k-primary fill-container k-button']"
-    Customer_excel_sheet_tab_selection_xpath ="//span[@title='Customers']"
+    Customer_excel_sheet_tab_selection_xpath = "//span[@title='Customers']"
     next_step_button_in_flow_xpath = "//button[normalize-space()='Next']"
-    Qbo_connection_button_xpath ="//span[contains(text(),'Click Here to Connect to Existing QuickBooks Onlin')]"
+    Qbo_connection_button_xpath = "//span[contains(text(),'Click Here to Connect to Existing QuickBooks Onlin')]"
     Qbo_connection_button_setting_dropdown_cssselector = ".k-panelbar-item-text.ng-tns-c89-17.ng-star-inserted"
     Qbo_connection_popup_toggle_on_xpath = "//span[@class='k-switch-label-off']"
     Qbo_connection_popup_create_connection_button_cssselector = "span[class='ng-star-inserted']"
@@ -39,8 +39,8 @@ class EntitiesPage:
     next_6step_button_in_flow_xpath = "//button[normalize-space()='Next']"
     edit_your_autymation_field_xpath = "//input[@class='k-input']"
     Run_Your_Autymation_button_xpath = "//div[@fxlayoutalign='center center']//button[@role='button']"
-
-
+    Intuit_popup_email_selecting_button_xpath = "//span[normalize-space()='Email a code']"
+    Intuit_popup_verification_code_continue_button_xpath = "//span[normalize-space()='Continue']"
 
     def __init__(self, driver):
         self.driver = driver
@@ -60,7 +60,7 @@ class EntitiesPage:
         time.sleep(5)
         self.driver.find_element(By.XPATH, self.select_file_upload_option_xpath).click()
 
-    def Customer_entity_selection (self):
+    def Customer_entity_selection(self):
         # /////////////////////////Choose destination to see relevant options below////////////////////////////
         self.driver.find_element(By.XPATH, self.select_source_entity_destination_dropdown_xpath).click()
         time.sleep(5)
@@ -94,7 +94,8 @@ class EntitiesPage:
         time.sleep(5)
         self.driver.find_element(By.XPATH, self.Qbo_connection_popup_toggle_on_xpath).click()
         time.sleep(5)
-        self.driver.find_element(By.CSS_SELECTOR, self.Qbo_connection_popup_create_connection_button_cssselector).click()
+        self.driver.find_element(By.CSS_SELECTOR,
+                                 self.Qbo_connection_popup_create_connection_button_cssselector).click()
 
     def Intuit_popup_Login_Credentials(self):
 
@@ -103,23 +104,44 @@ class EntitiesPage:
         self.driver.switch_to.window(intuit_window)
 
         self.driver.find_element(By.XPATH, self.Intuit_popup_Login_credentials_Email_xpath).click()
-        self.driver.find_element(By.XPATH, self.Intuit_popup_Login_credentials_Email_xpath).send_keys("termsorqbo+1@gmail.com")
+        self.driver.find_element(By.XPATH, self.Intuit_popup_Login_credentials_Email_xpath).send_keys(
+            "termsorqbo+1@gmail.com")
         time.sleep(1)
         self.driver.find_element(By.ID, self.Intuit_popup_Login_credentials_Password_id).click()
         self.driver.find_element(By.ID, self.Intuit_popup_Login_credentials_Password_id).send_keys("Autotestk210#")
         time.sleep(2)
         self.driver.find_element(By.CSS_SELECTOR, self.Intuit_popup_SignIn_button_cssselector).click()
-        time.sleep(5)
-
-        self.driver.find_element(By.XPATH, self.Intuit_popup_Skip_now_button_xpath).click()
-        time.sleep(2)
+        time.sleep(10)
+        # self.driver.find_element(By.XPATH, self.Intuit_popup_Skip_now_button_xpath).click()
+        # time.sleep(2)
         try:
+            self.driver.find_element(By.XPATH, self.Intuit_popup_Skip_now_button_xpath).click()
+        except NoSuchElementException:
+            print("Element 1 not found. Moving to next step...")
+        try:
+            time.sleep(2)
+            self.driver.find_element(By.XPATH, self.Intuit_popup_email_selecting_button_xpath).click()
+        except NoSuchElementException:
+            print("Element 2 not found. Moving to next step...")
+        '''
+        try:
+            time.sleep(5)
             self.driver.find_element(By.CSS_SELECTOR, self.Intuit_popup_Connecting_Autymate_to_QBO_button_cssselector).click()
         except NoSuchElementException:
-            # Handle the case when the element is not found and move to the next step
-            print("Element not found. Moving to next step...")
+            print("Element 3 not found. Moving to next step...")
+        
+        try:
+            time.sleep(20)
+            self.driver.find_element(By.XPATH, self.Intuit_popup_verification_code_continue_button_xpath).click()
+        except NoSuchElementException:
+            print("Element 4 not found. Moving to next step...")
+        '''
+        try:
+            time.sleep(5)
+            self.driver.find_element(By.XPATH, self.Intuit_popup_Skip_now_button_xpath).click()
+        except NoSuchElementException:
+            print("Element 5 not found. Moving to next step...")
         pass
-        time.sleep(5)
         # Switch back to the original window
         self.driver.switch_to.window(self.driver.window_handles[0])
 
@@ -140,14 +162,6 @@ class EntitiesPage:
         self.driver.find_element(By.XPATH, self.edit_your_autymation_field_xpath).send_keys("Automation")
         time.sleep(2)
         self.driver.find_element(By.XPATH, self.Run_Your_Autymation_button_xpath).click()
-
-
-
-
-
-
-
-
 
     def clickLogout(self):
         self.driver.find_element(By.XPATH, self.arrow_dropdown_button_xpath).click()
