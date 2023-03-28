@@ -123,6 +123,7 @@ class EntitiesPage:
             self.driver.find_element(By.XPATH, self.Intuit_popup_email_selecting_button_xpath).click()
         except NoSuchElementException:
             print("Element 2 not found. Moving to next step...")
+        pass
         '''
         try:
             time.sleep(5)
@@ -135,14 +136,16 @@ class EntitiesPage:
             self.driver.find_element(By.XPATH, self.Intuit_popup_verification_code_continue_button_xpath).click()
         except NoSuchElementException:
             print("Element 4 not found. Moving to next step...")
-        '''
+        
         try:
             time.sleep(5)
             self.driver.find_element(By.XPATH, self.Intuit_popup_Skip_now_button_xpath).click()
         except NoSuchElementException:
             print("Element 5 not found. Moving to next step...")
         pass
+        '''
         # Switch back to the original window
+        time.sleep(5)
         self.driver.switch_to.window(self.driver.window_handles[0])
 
     def Finishing_steps_flow(self):
