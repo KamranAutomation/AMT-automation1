@@ -33,7 +33,7 @@ class EntitiesPage:
     Intuit_popup_Skip_now_button_xpath = "//button[normalize-space()='Skip for now']"
     Intuit_popup_Connecting_Autymate_to_QBO_button_cssselector = ".StyledButton__Wrapper-vnaxcc-1.gYvrJh.authorize-connect-button"
     next_3step_button_in_flow_xpath = "//button[normalize-space()='Next']"
-    email_for_notification_4step_cssselector = ".margin-top-5.fill-container.ng-pristine.ng-valid.k-textarea.k-autofill.ng-touched"
+    email_for_notification_4step_xpath = "//div[@fxlayout='column']//span//textarea"
     next_4step_button_in_flow_xpath = "//button[normalize-space()='Next']"
     next_5step_button_in_flow_xpath = "//button[normalize-space()='Next']"
     next_6step_button_in_flow_xpath = "//button[normalize-space()='Next']"
@@ -152,8 +152,8 @@ class EntitiesPage:
 
         self.driver.find_element(By.XPATH, self.next_3step_button_in_flow_xpath).click()
         time.sleep(5)
-        self.driver.find_element(By.CSS_SELECTOR, self.email_for_notification_4step_cssselector).click()
-        self.driver.find_element(By.CSS_SELECTOR, self.email_for_notification_4step_cssselector).send_keys("automation@mailinator.com")
+        self.driver.find_element(By.XPATH, self.email_for_notification_4step_xpath).click()
+        self.driver.find_element(By.XPATH, self.email_for_notification_4step_xpath).send_keys("automation@mailinator.com")
         time.sleep(2)
         self.driver.find_element(By.XPATH, self.next_4step_button_in_flow_xpath).click()
         time.sleep(25)
