@@ -41,6 +41,10 @@ class EntitiesPage:
     Run_Your_Autymation_button_xpath = "//div[@fxlayoutalign='center center']//button[@role='button']"
     Intuit_popup_email_selecting_button_xpath = "//span[normalize-space()='Email a code']"
     Intuit_popup_verification_code_continue_button_xpath = "//span[normalize-space()='Continue']"
+    Review_validation_of_Enitity_Success = "//h4[normalize-space()='Success: 2']"
+    Review_validation_of_Enitity_All = "//span[normalize-space()='All: 2']"
+    Review_validation_of_Enitity_Failed = "//h4[normalize-space()='Failed: 0']"
+    Review_validation_of_Enitity_page_button_Finish = "//button[normalize-space()='Finish']"
 
     def __init__(self, driver):
         self.driver = driver
@@ -166,6 +170,34 @@ class EntitiesPage:
         time.sleep(2)
         self.driver.find_element(By.XPATH, self.Run_Your_Autymation_button_xpath).click()
 
-    def clickLogout(self):
-        self.driver.find_element(By.XPATH, self.arrow_dropdown_button_xpath).click()
-        self.driver.find_element(By.XPATH, self.button_Logout_xpath).click()
+    def entity_validation_status_check(self):
+
+        global all_count, success_count, failed_count
+        try:
+            all_count_element = self.driver.find_element(By.XPATH, self.Review_validation_of_Enitity_All)
+            all_count_text = all_count_element.text
+            all_count = int(all_count_text.split()[-1])
+        except NoSuchElementException:
+            print("All count not found")
+
+        try:
+            success_count_element = self.driver.find_element(By.XPATH, self.Review_validation_of_Enitity_Success)
+            success_count_text = success_count_element.text
+            success_count = int(success_count_text.split()[-1])
+        except NoSuchElementException:
+            print("Success count not found")
+
+        try:
+            failed_count_element = self.driver.find_element(By.XPATH, self.Review_validation_of_Enitity_Failed)
+            failed_count_text = failed_count_element.text
+            failed_count = int(failed_count_text.split()[-1])
+        except NoSuchElementException:
+            print("Failed count not found")
+
+        # Compare the counts to the expected values and print the result
+        if all_count == success_count and failed_count == 0:
+            print("Test case passed")
+        else:
+            print("Test case failed")
+
+
